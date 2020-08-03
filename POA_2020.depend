@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1596464106 source:/home/pi/Documents/C-Projects/POA_2020/main.c
+	<stdio.h>
+	<stdlib.h>
+	<wiringPi.h>
+	<stdbool.h>
+	<stdlib.h>
+	"SecuritySystem.h"
+	"PlatineDefines.h"
+	"SevenSegmentDisplay.h"
+
+1596466267 /home/pi/Documents/C-Projects/POA_2020/SecuritySystem.h
+
+1596382152 /home/pi/Documents/C-Projects/POA_2020/PlatineDefines.h
+
+1596385110 /home/pi/Documents/C-Projects/POA_2020/SevenSegmentDisplay.h
+
+1596465636 source:/home/pi/Documents/C-Projects/POA_2020/SecuritySystem.c
+	"SecuritySystem.h"
+	"PlatineDefines.h"
+	<wiringPi.h>
+
+1596463756 source:/home/pi/Documents/C-Projects/POA_2020/SevenSegmentDisplay.c
+	<stdio.h>
+	"SevenSegmentDisplay.h"
+	"PlatineDefines.h"
+
