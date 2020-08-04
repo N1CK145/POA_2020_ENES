@@ -6,8 +6,6 @@ void disableSecuritySystem();
 int isSecurtySystemEnabled();
 
 // MySQL
-void registerNewDeviceIfNotExists(char* name);
-void reisterNewUser(char* firstname, char* lastname, char* pin);
 void goIn(int userID);
 void goOut(int userID);
 

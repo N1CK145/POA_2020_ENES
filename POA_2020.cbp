@@ -31,6 +31,19 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="DatabaseConnection.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="DatabaseConnection.h" />
+		<Unit filename="PlatineDefines.h" />
+		<Unit filename="SecuritySystem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SecuritySystem.h" />
+		<Unit filename="SevenSegmentDisplay.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SevenSegmentDisplay.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -1,17 +1,18 @@
 # depslib dependency file v1.0
-1596464106 source:/home/pi/Documents/C-Projects/POA_2020/main.c
+1596541336 source:/home/pi/Documents/C-Projects/POA_2020/main.c
 	<stdio.h>
 	<stdlib.h>
 	<wiringPi.h>
 	<stdbool.h>
-	<stdlib.h>
+	<mysql/mysql.h>
 	"SecuritySystem.h"
 	"PlatineDefines.h"
 	"SevenSegmentDisplay.h"
+	"Keypad.h"
 
-1596466267 /home/pi/Documents/C-Projects/POA_2020/SecuritySystem.h
+1596540561 /home/pi/Documents/C-Projects/POA_2020/SecuritySystem.h
 
-1596382152 /home/pi/Documents/C-Projects/POA_2020/PlatineDefines.h
+1596483180 /home/pi/Documents/C-Projects/POA_2020/PlatineDefines.h
 
 1596385110 /home/pi/Documents/C-Projects/POA_2020/SevenSegmentDisplay.h
 
@@ -24,4 +25,13 @@
 	<stdio.h>
 	"SevenSegmentDisplay.h"
 	"PlatineDefines.h"
+
+1596491577 source:/home/pi/Documents/C-Projects/POA_2020/DatabaseConnection.c
+	<mysql/mysql.h>
+	<stdio.h>
+	"DatabaseConnection.h"
+
+1596491291 /home/pi/Documents/C-Projects/POA_2020/DatabaseConnection.h
+
+1596541284 /home/pi/Documents/C-Projects/POA_2020/Keypad.h
 
