@@ -27,7 +27,7 @@ int main(){
     // testAll();
 
     while(true){
-        readKeypadAndWriteToSegment();
+
 
         delay(50);
     }
@@ -35,6 +35,19 @@ int main(){
     getchar();
 
     return 0;
+}
+
+char* readPin(){
+    char input = readKeypadAndWriteToSegment();
+    char* pin = (char*)malloc()
+
+    if(input != '\0'){
+        printf("Input: %c\n", input);
+    }
+
+    while(isKeypadPressed()){
+        delay(50);
+    }
 }
 
 void initPins(){

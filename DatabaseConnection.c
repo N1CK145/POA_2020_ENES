@@ -15,6 +15,8 @@ void finish_with_error()
 void openDBConnection(){
     char* host = "lia-gaming.de";
     char* user = "schule";
+    char* passwd = "123";
+    char* db = "POA_2020";
 
     mysqlConnection = mysql_init(NULL);
     if(mysqlConnection == NULL){
@@ -22,7 +24,7 @@ void openDBConnection(){
         return;
     }
 
-    if(mysql_real_connect (mysqlConnection, host, user, "123", "POA_2020", 0, NULL, 0) == NULL){
+    if(mysql_real_connect (mysqlConnection, host, user, passwd, db, 0, NULL, 0) == NULL){
         unsigned int error = mysql_errno(mysqlConnection);
         printf("MySQL Error: %u (%s)\n", error, mysql_error(mysqlConnection));
     }else

@@ -6,10 +6,12 @@ int securitySystemLedPin = PIN_RGB_RED;
 
 void enableSecuritySystem(){
     digitalWrite(securitySystemLedPin, HIGH);
+    printf("Enabled Securitysystem!\n");
 }
 
 void disableSecuritySystem(){
     digitalWrite(securitySystemLedPin, LOW);
+    printf("Disabled Securitysystem!\n");
 }
 
 int isSecurtySystemEnabled(){

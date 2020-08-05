@@ -1,5 +1,6 @@
 #include "Keypad.h"
 #include "PlatineDefines.h"
+
 #include <wiringPi.h>
 
 int keyboardPins[8] = {PIN_KEYBOARD_1, PIN_KEYBOARD_2, PIN_KEYBOARD_3, PIN_KEYBOARD_4, PIN_KEYBOARD_5, PIN_KEYBOARD_6, PIN_KEYBOARD_7, PIN_KEYBOARD_8};
@@ -10,7 +11,7 @@ char keyboardValues[4][4] = {
     {'A', '3', '2', '1'}
 };
 
-void readKeypadAndWriteToSegment(){
+char readKeypadAndWriteToSegment(){
     for(int i = 0; i < 4; i++){ // Spalten
         digitalWrite(PIN_KEYBOARD_1, LOW);
         digitalWrite(PIN_KEYBOARD_2, LOW);
@@ -22,7 +23,6 @@ void readKeypadAndWriteToSegment(){
         for(int j = 0; j < 4; j++){ // Zeilen
             if(digitalRead(keyboardPins[j+4])){
                 char val = keyboardValues[j][i];
-                printf("%c\n", val);
 
                 switch(val){
                     case '0':case '1':case '2':case '3':case '4':case '5':case '6':case '7':case '8':case '9':
@@ -41,7 +41,27 @@ void readKeypadAndWriteToSegment(){
                         setSegment(15);
                         break;
                 }
+                return val;
             }
         }
     }
+    return '\0';
+}
+
+int isKeypadPressed(){
+    for(int i = 0; i < 4; i++){
+        digitalWrite(PIN_KEYBOARD_1, HIGH);
+        digitalWrite(PIN_KEYBOARD_2, HIGH);
+        digitalWrite(PIN_KEYBOARD_3, HIGH);
+        digitalWrite(PIN_KEYBOARD_4, HIGH);
+
+        if(digitalRead(keyboardPins[i+4])){
+            digitalWrite(PIN_KEYBOARD_1, LOW);
+            digitalWrite(PIN_KEYBOARD_2, LOW);
+            digitalWrite(PIN_KEYBOARD_3, LOW);
+            digitalWrite(PIN_KEYBOARD_4, LOW);
+            return 1;
+        }
+    }
+    return 0;
 }
