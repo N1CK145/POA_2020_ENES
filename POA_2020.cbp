@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="DatabaseConnection.h" />
+		<Unit filename="Keypad.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Keypad.h" />
 		<Unit filename="PlatineDefines.h" />
 		<Unit filename="SecuritySystem.c">
 			<Option compilerVar="CC" />

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <wiringPi.h>
 #include <stdbool.h>
-
+#include <string.h>
 #include <mysql/mysql.h>
 
 #include "SecuritySystem.h"
@@ -13,6 +13,7 @@
 void initPins();
 void initDevice();
 void printClientInformation();
+char* readPin();
 
 struct deviceInfo thisDeviceInfo;
 
@@ -26,11 +27,9 @@ int main(){
 
     // testAll();
 
-    while(true){
-
-
-        delay(50);
-    }
+    printf("Please inser your pin: \n");
+    char * pin = readPin();
+    printf("Pin: %s\n", pin);
 
     getchar();
 
@@ -38,16 +37,34 @@ int main(){
 }
 
 char* readPin(){
-    char input = readKeypadAndWriteToSegment();
-    char* pin = (char*)malloc()
+    int pinLen = 4;
+    int lenIndex = 0;
 
-    if(input != '\0'){
-        printf("Input: %c\n", input);
-    }
+    char input;
+    char* pin = (char*)malloc(pinLen+1 * sizeof(char));
+    strcpy(pin, "");
+    do {
+        input = readKeypadAndWriteToSegment();
+        if(input != '\0'){
+            switch(input){
+                case '*': // Remove last char
 
-    while(isKeypadPressed()){
-        delay(50);
-    }
+                    break;
+                default:
+                    sprintf(pin, "%s%c", pin, input);
+                    lenIndex++;
+                    break;
+            }
+
+        }
+
+        while(isKeypadPressed()){
+            delay(50);
+        }
+        delay(10);
+    } while (lenIndex < pinLen);
+
+    return pin;
 }
 
 void initPins(){
