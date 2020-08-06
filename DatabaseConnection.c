@@ -1,5 +1,6 @@
 #include <mysql/mysql.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "DatabaseConnection.h"
 
@@ -31,7 +32,7 @@ void openDBConnection(){
         printf("MySQL Verbindung hergestellt!\nVerbunden zu '%s' als '%s'\n", host, user);
 }
 
-void closeConnection(){
+void closeDBConnection(){
     mysql_close(mysqlConnection);
 }
 

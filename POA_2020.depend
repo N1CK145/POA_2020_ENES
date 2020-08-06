@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1596721496 source:/home/pi/Documents/C-Projects/POA_2020/main.c
+1596724091 source:/home/pi/Documents/C-Projects/POA_2020/main.c
 	<stdio.h>
 	<stdlib.h>
 	<wiringPi.h>
 	<stdbool.h>
+	<string.h>
 	<mysql/mysql.h>
 	"SecuritySystem.h"
 	"PlatineDefines.h"
@@ -26,9 +27,10 @@
 	"SevenSegmentDisplay.h"
 	"PlatineDefines.h"
 
-1596623149 source:/home/pi/Documents/C-Projects/POA_2020/DatabaseConnection.c
+1596724067 source:/home/pi/Documents/C-Projects/POA_2020/DatabaseConnection.c
 	<mysql/mysql.h>
 	<stdio.h>
+	<stdlib.h>
 	"DatabaseConnection.h"
 
 1596491291 /home/pi/Documents/C-Projects/POA_2020/DatabaseConnection.h

@@ -18,51 +18,59 @@ char* readPin();
 struct deviceInfo thisDeviceInfo;
 
 int main(){
-    // delay(5000);
     wiringPiSetup();
     initPins();
 
     initDevice();
     printClientInformation();
 
-    // testAll();
-
     printf("Please inser your pin: \n");
     char * pin = readPin();
     printf("Pin: %s\n", pin);
 
     getchar();
+    disableSecuritySystem();
+    closeDBConnection();
 
     return 0;
 }
 
 char* readPin(){
-    int pinLen = 4;
+    int pinMaxLen = 32;
     int lenIndex = 0;
 
     char input;
-    char* pin = (char*)malloc(pinLen+1 * sizeof(char));
+    char* pin = (char*)malloc(pinMaxLen * sizeof(char));
+
     strcpy(pin, "");
+
     do {
         input = readKeypadAndWriteToSegment();
         if(input != '\0'){
             switch(input){
                 case '*': // Remove last char
-
+                    if(lenIndex > 0){
+                        pin[strlen(pin)-1] = 0;
+                        lenIndex--;
+                    }
                     break;
+
+                case '#': // Finish pin
+                    lenIndex = pinMaxLen;
+                    break;
+
                 default:
                     sprintf(pin, "%s%c", pin, input);
                     lenIndex++;
                     break;
             }
-
         }
 
         while(isKeypadPressed()){
             delay(50);
         }
         delay(10);
-    } while (lenIndex < pinLen);
+    } while (lenIndex < pinMaxLen);
 
     return pin;
 }
