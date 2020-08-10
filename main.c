@@ -10,33 +10,87 @@
 #include "SevenSegmentDisplay.h"
 #include "Keypad.h"
 
+#define ACTION_LOGIN "1"
+#define ACTION_LOGOUT "2"
+
 void initPins();
 void initDevice();
 void printClientInformation();
 char* readPin();
+int checkForRightLogin(char*, char*);
+void updateActivityLog(char*);
 
 struct deviceInfo thisDeviceInfo;
+int pinMaxLen = 32;
+char* employeeID = "1";
+char* pin = "123A";
+
 
 int main(){
+    bool loggedIn = false;
+
     wiringPiSetup();
     initPins();
 
     initDevice();
     printClientInformation();
 
-    printf("Please inser your pin: \n");
-    char * pin = readPin();
-    printf("Pin: %s\n", pin);
+    do{
+        /*printf("Please insert your Gelegenheitsunternehmensangestellteidentifikationsnummer:\n");
+        employeeID = readPin();
 
-    getchar();
-    disableSecuritySystem();
+        printf("Please insert your Gelegenheitsunternehmensangestelltenkennwort:\n");
+        pin = readPin();*/
+
+        if(!checkForRightLogin(employeeID, pin)){
+            printf("Invalid Login...\n");
+            loggedIn = false;
+        }else
+            loggedIn = true;
+
+    }while(!loggedIn);
+    updateActivityLog(employeeID);
+
+    disableSecuritySystem();+
+
     closeDBConnection();
 
     return 0;
 }
 
+void updateActivityLog(char* employeeID){
+    char* qry = (char*)malloc(200 * sizeof(char));
+    sprintf(qry, "SELECT ActionID FROM tbl_ActivityLog WHERE UserID LIKE '%s' ORDER BY Identifikationsnummer DESC LIMIT 1;", employeeID);
+
+    MYSQL_RES* result = getMySQLResult(qry);
+    MYSQL_ROW* row = mysql_fetch_row(result);
+
+    if(!row){
+        sprintf(qry, "INSERT INTO `tbl_ActivityLog`(`UserID`, `ActionID`, `DeviceID`) VALUES ('%s', '%s', '%i');",
+            employeeID, ACTION_LOGIN, thisDeviceInfo.id);
+
+    }else{
+        if(!strcmp(row[0], ACTION_LOGIN))
+            sprintf(qry, "INSERT INTO `tbl_ActivityLog`(`UserID`, `ActionID`, `DeviceID`) VALUES ('%s', '%s', '%i');",
+                employeeID, ACTION_LOGOUT, thisDeviceInfo.id);
+        else
+            sprintf(qry, "INSERT INTO `tbl_ActivityLog`(`UserID`, `ActionID`, `DeviceID`) VALUES ('%s', '%s', '%i');",
+                employeeID, ACTION_LOGIN, thisDeviceInfo.id);
+    }
+    sendMySQLQuerry(qry);
+}
+
+int checkForRightLogin(char* uID, char* uPin){
+    char* qry = (char*)malloc((128 + pinMaxLen) * sizeof(char));
+
+    sprintf(qry, "SELECT * FROM tbl_User WHERE Gelegenheitsunternehmensangestellteidentifikationsnummer LIKE '%s' AND Pin LIKE '%s';", uID, uPin);
+
+    MYSQL_RES* result = getMySQLResult(qry);
+    return mysql_fetch_row(result);
+}
+
+
 char* readPin(){
-    int pinMaxLen = 32;
     int lenIndex = 0;
 
     char input;

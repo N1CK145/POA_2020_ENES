@@ -5,5 +5,6 @@ void openDBConnection();
 void closeDBConnection();
 char* getMySQLClientInfo();
 MYSQL_RES* getMySQLResult(char* querry);
+void sendMySQLQuerry(char* querry);
 
 #endif // DATABASECONNECTION_H_INCLUDED

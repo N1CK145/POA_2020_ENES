@@ -48,6 +48,6 @@ MYSQL_RES* getMySQLResult(char* querry){
 }
 
 void sendMySQLQuerry(char* querry){
-    mysql_query(mysqlConnection, querry);
-
+    if (mysql_query(mysqlConnection, querry))
+        finish_with_error();
 }
