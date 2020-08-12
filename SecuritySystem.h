@@ -3,7 +3,7 @@
 
 void enableSecuritySystem();
 void disableSecuritySystem();
-int isSecurtySystemEnabled();
+int isPersonInRoom();
 
 // MySQL
 void goIn(int userID);

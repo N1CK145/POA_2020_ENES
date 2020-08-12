@@ -1,5 +1,6 @@
 #ifndef DATABASECONNECTION_H_INCLUDED
 #define DATABASECONNECTION_H_INCLUDED
+#include <mysql/mysql.h>
 
 void openDBConnection();
 void closeDBConnection();

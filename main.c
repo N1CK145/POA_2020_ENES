@@ -10,9 +10,6 @@
 #include "SevenSegmentDisplay.h"
 #include "Keypad.h"
 
-#define ACTION_LOGIN "1"
-#define ACTION_LOGOUT "2"
-
 void initPins();
 void initDevice();
 void printClientInformation();
@@ -22,8 +19,8 @@ void updateActivityLog(char*);
 
 struct deviceInfo thisDeviceInfo;
 int pinMaxLen = 32;
-char* employeeID = "1";
-char* pin = "123A";
+char* employeeID = 2;
+char* pin = "4321";
 
 
 int main(){
@@ -35,23 +32,29 @@ int main(){
     initDevice();
     printClientInformation();
 
-    do{
-        /*printf("Please insert your Gelegenheitsunternehmensangestellteidentifikationsnummer:\n");
-        employeeID = readPin();
+    while(1){
+        delay(2000);
+        system("clear");
+        do{
+            printf("Please insert your Gelegenheitsunternehmensangestellteidentifikationsnummer:\n");
+            employeeID = readPin();
 
-        printf("Please insert your Gelegenheitsunternehmensangestelltenkennwort:\n");
-        pin = readPin();*/
+            printf("Please insert your Gelegenheitsunternehmensangestelltenkennwort:\n");
+            pin = readPin();
 
-        if(!checkForRightLogin(employeeID, pin)){
-            printf("Invalid Login...\n");
-            loggedIn = false;
-        }else
-            loggedIn = true;
+            if(!checkForRightLogin(employeeID, pin)){
+                printf("Invalid Login...\n");
+                loggedIn = false;
+            }else
+                loggedIn = true;
 
-    }while(!loggedIn);
-    updateActivityLog(employeeID);
+        }while(!loggedIn);
+        updateActivityLog(employeeID);
 
-    disableSecuritySystem();+
+    }
+
+    delay(1000);
+    disableSecuritySystem();
 
     closeDBConnection();
 
@@ -60,24 +63,23 @@ int main(){
 
 void updateActivityLog(char* employeeID){
     char* qry = (char*)malloc(200 * sizeof(char));
-    sprintf(qry, "SELECT ActionID FROM tbl_ActivityLog WHERE UserID LIKE '%s' ORDER BY Identifikationsnummer DESC LIMIT 1;", employeeID);
+    sprintf(qry, "SELECT * FROM tbl_ActivityLog WHERE UserID = %s AND DeviceID_Logout IS NULL;", employeeID);
 
     MYSQL_RES* result = getMySQLResult(qry);
     MYSQL_ROW* row = mysql_fetch_row(result);
 
     if(!row){
-        sprintf(qry, "INSERT INTO `tbl_ActivityLog`(`UserID`, `ActionID`, `DeviceID`) VALUES ('%s', '%s', '%i');",
-            employeeID, ACTION_LOGIN, thisDeviceInfo.id);
+        disableSecuritySystem();
+        sprintf(qry, "INSERT INTO `tbl_ActivityLog`(`UserID`, `DeviceID_Login`) VALUES ('%s', '%i');",
+            employeeID, thisDeviceInfo.id);
 
     }else{
-        if(!strcmp(row[0], ACTION_LOGIN))
-            sprintf(qry, "INSERT INTO `tbl_ActivityLog`(`UserID`, `ActionID`, `DeviceID`) VALUES ('%s', '%s', '%i');",
-                employeeID, ACTION_LOGOUT, thisDeviceInfo.id);
-        else
-            sprintf(qry, "INSERT INTO `tbl_ActivityLog`(`UserID`, `ActionID`, `DeviceID`) VALUES ('%s', '%s', '%i');",
-                employeeID, ACTION_LOGIN, thisDeviceInfo.id);
+        sprintf(qry, "UPDATE tbl_ActivityLog SET DeviceID_Logout = %i, Time_Logout = NOW() WHERE DeviceID_Logout IS NULL AND UserID = %s;",
+            thisDeviceInfo.id, employeeID);
     }
     sendMySQLQuerry(qry);
+    if(!isPersonInRoom())
+            enableSecuritySystem();
 }
 
 int checkForRightLogin(char* uID, char* uPin){
@@ -155,8 +157,12 @@ void initPins(){
 }
 
 void initDevice(){
+    digitalWrite(PIN_RGB_GREEN, LOW);
+    digitalWrite(PIN_RGB_RED, LOW);
+    digitalWrite(PIN_RGB_BLUE, LOW);
+
     char* qry = (char*)malloc(75 * sizeof(char));
-    thisDeviceInfo.id = 1;
+    thisDeviceInfo.id = 2;
 
     printf("Connecting to database...\n");
     openDBConnection();
@@ -165,6 +171,11 @@ void initDevice(){
     sprintf(qry, "SELECT Bezeichnung FROM tbl_Devices WHERE Identifikationsnummer = %i;", thisDeviceInfo.id);
     MYSQL_ROW row = mysql_fetch_row(getMySQLResult(qry));
     thisDeviceInfo.name = row[0];
+
+    if(isPersonInRoom())
+        disableSecuritySystem();
+    else
+        enableSecuritySystem();
 }
 
 void printClientInformation(){

@@ -1,22 +1,28 @@
 #include "SecuritySystem.h"
 #include "PlatineDefines.h"
+#include "DatabaseConnection.h"
 #include <wiringPi.h>
 #include <stdio.h>
 
-int securitySystemLedPin = PIN_RGB_RED;
-
 void enableSecuritySystem(){
-    digitalWrite(securitySystemLedPin, HIGH);
+    //digitalWrite(PIN_RGB_GREEN, LOW);
+    digitalWrite(PIN_RGB_RED, HIGH);
+
     printf("Enabled Securitysystem!\n");
 }
 
 void disableSecuritySystem(){
-    digitalWrite(securitySystemLedPin, LOW);
+    digitalWrite(PIN_RGB_RED, LOW);
+    //digitalWrite(PIN_RGB_GREEN, HIGH);
     printf("Disabled Securitysystem!\n");
 }
 
-int isSecurtySystemEnabled(){
-    return digitalRead(securitySystemLedPin);
-}
+int isPersonInRoom(){
+    MYSQL_RES* result = getMySQLResult("SELECT * FROM v_personsInRoom LIMIT 1;");
+    MYSQL_ROW* row = mysql_fetch_row(result);
 
-//void goIn(char* pin)
+    if(!row)
+        return 0;
+    else
+        return 1;
+}
