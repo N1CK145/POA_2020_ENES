@@ -22,6 +22,7 @@ namespace POA_2020_GUI
     public partial class MainWindow : Window
     {
         public static MainWindow mainWindw;
+       
 
         public MainWindow()
         {

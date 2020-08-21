@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POA_2020_GUI
 {
-    class Devices
+    class Device
     {
         private int id;
 
@@ -24,7 +24,7 @@ namespace POA_2020_GUI
             set { bezeichnung = value; }
         }
 
-        public Devices(int id, string bezeichnung)
+        public Device(int id, string bezeichnung)
         {
             this.id = id;
             this.bezeichnung = bezeichnung;
