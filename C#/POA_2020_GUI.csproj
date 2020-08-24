@@ -40,9 +40,12 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
     </Reference>
+=======
+>>>>>>> 2d55aaf0a8b7ed4af74eec1b11d7b6770b1f94f0
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -117,6 +120,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
     <Compile Include="objects\ActivityLogEntry.cs" />
     <Compile Include="objects\Device.cs" />
     <Compile Include="Menue.xaml.cs">
@@ -127,6 +131,14 @@
     <Compile Include="utils\DB_Connection.cs" />
     <Compile Include="utils\DeviceManager.cs" />
     <Compile Include="utils\UserManager.cs" />
+=======
+    <Compile Include="ActivityLogEntry.cs" />
+    <Compile Include="DB_Connection.cs" />
+    <Compile Include="DeviceManager.cs" />
+    <Compile Include="Device.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserManager.cs" />
+>>>>>>> 2d55aaf0a8b7ed4af74eec1b11d7b6770b1f94f0
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
