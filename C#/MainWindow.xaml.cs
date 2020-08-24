@@ -12,7 +12,8 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
 using System.Threading;
-
+using POA_2020_GUI.utils;
+using System.Threading.Tasks;
 
 namespace POA_2020_GUI
 {
@@ -21,12 +22,12 @@ namespace POA_2020_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MainWindow mainWindw;
+        DB_Connection con;
 
         public MainWindow()
         {
             InitializeComponent();
-            mainWindw = this;
+            con = new DB_Connection("lia-gaming.de", "POA_2020", "schule", "123");
         }
 
         private void closeclick(object sender, RoutedEventArgs e)
@@ -34,8 +35,21 @@ namespace POA_2020_GUI
             Close();
         }
 
-        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
+        private async void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            con.Open();
+            DataTable dt = await con.QuerryAsync($"SELECT * FROM tbl_User WHERE Gelegenheitsunternehmensangestellteidentifikationsnummer LIKE '{txt_Username.Text}' AND Pin LIKE '{ txt_Password.Password }';");
+            if (dt.Rows.Count == 1)
+            {
+                con.Close();
+                new Menue().Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid User", "Error");
+                con.Close();
+            }
 
         }
     }

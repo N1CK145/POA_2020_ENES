@@ -5,39 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POA_2020_GUI"
         mc:Ignorable="d"
+        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{ DynamicResource MaterialDesignBody }"
+        Background="{ DynamicResource MaterialDesignPaper }"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        
         Title="Loginscreen" Height="520" Width="830" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label x:Name="label" Content="" HorizontalAlignment="Right" Height="520" Margin="288,0,0,0" VerticalAlignment="Top" Width="520">
-            <Label.Background>
-                <ImageBrush ImageSource="https://lia-gaming.de/downloads/lia/imgs/lia_transperent_512.png"/>
-            </Label.Background>
-        </Label>
-        <Image Source="http://bk-tm.org/static/ci/downloads/logos/sw/bk_logo.jpg" Margin="10,-31,632,395"/>
-        <Label x:Name="label1" Content="Login" HorizontalAlignment="Left" Height="43" Margin="35,82,0,0" VerticalAlignment="Top" Width="153" FontSize="22" FontWeight="Bold"/>
-        <Grid Grid.Row="2"  HorizontalAlignment="Left" Height="39" Margin="30,180,0,0" VerticalAlignment="Top" Width="233.167">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="39" Margin="-1.333,0,0,0" VerticalAlignment="Top" Width="234.5"/>
-            <materialDesign:PackIcon Kind="Account" Width="20" Height="20" Foreground="{Binding ElementName=txt_Username,Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 0" ></materialDesign:PackIcon>
-            <TextBox x:Name="txt_Username" materialDesign:HintAssist.Hint="Username"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="25,-1,10.167,0" CaretBrush="#FF2B5BEB" BorderBrush="#FF696FD0" />
+        <Image Source="resources\imgs\lia_transperent_512.png" Width="520" Height="520" HorizontalAlignment="Right"/>
+        <Label Content="Los Ingobernables de Alemania" FontSize="30" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Login" HorizontalAlignment="Left" Height="35" Margin="30,108,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
+        <Grid Grid.Row="2" HorizontalAlignment="Left" Height="40" Margin="30,180,0,0" VerticalAlignment="Top" Width="233">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="39" VerticalAlignment="Top" Width="234.5"/>
+            <materialDesign:PackIcon Kind="Account" Width="20" Height="20" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom" Margin="0 0"/>
+            <TextBox x:Name="txt_Username" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="25, -1, 0 ,0"/>
         </Grid>
-        <Grid  HorizontalAlignment="Left" Height="39" Margin="30,250,0,0" VerticalAlignment="Top" Width="233.167">
+        <Grid HorizontalAlignment="Left" Height="39" Margin="30,250,0,0" VerticalAlignment="Top" Width="233.167">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200*"/>
                 <ColumnDefinition Width="33*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="39" Margin="-1.333,0,10,0" VerticalAlignment="Top" Width="234.5" Grid.ColumnSpan="2"/>
-            <materialDesign:PackIcon Kind="Key" Width="20" Height="20" Foreground="{Binding ElementName=txt_Password,Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 0" ></materialDesign:PackIcon>
-            <PasswordBox x:Name="txt_Password"  materialDesign:HintAssist.Hint="Password"  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Grid.ColumnSpan="2" Margin="25,0,10,0" CaretBrush="#FF2B5BEB" BorderBrush="#FF696FD0" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="40" Margin="0,0,10,0" VerticalAlignment="Top" Width="233" Grid.ColumnSpan="2"/>
+            <materialDesign:PackIcon Kind="Key" Width="20" Height="20" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom" />
+            <PasswordBox x:Name="txt_Password"  materialDesign:HintAssist.Hint="Password"  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Grid.ColumnSpan="2" Margin="25, -1, 0, 0"/>
         </Grid>
         <Button Margin="102,350,658,128" Height="Auto" Name="btnSubmit" Click="BtnSubmit_Click" Content="Login" BorderBrush="Transparent"/>
-        <TextBox Focusable="False" HorizontalAlignment="Left" Height="22" Margin="10,488,0,0" TextWrapping="NoWrap" Text="Enes Ünsal, Nicklas Gehlen" VerticalAlignment="Top" Width="122" Foreground="black" FontSize="10"/>
-        <ToggleButton x:Name="btn_close"
-  Style="{StaticResource MaterialDesignFlatToggleButton}"
-  ToolTip="Close" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Height="50" Width="50" Click="closeclick">
-            <materialDesign:PackIcon
-    Kind="Close"
-    Height="20"
-    Width="20" Foreground="Red"/>
-        </ToggleButton>
+        <Button Background="Transparent" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Right" BorderBrush="Transparent" BorderThickness="0" Margin="0,0,10,0" Click="closeclick">
+            <materialDesign:PackIcon Kind="close" Height="20" Width="20" Foreground="Red" Margin="0"/>
+        </Button>
+        <Label HorizontalAlignment="Left" Margin="10,0,0,10" Content="Enes Ünsal, Nicklas Gehlen" VerticalAlignment="Bottom" FontSize="12"/>
+        <Label HorizontalAlignment="Right" Margin="0,0,10,10" Content="https://lia-gaming.de/" VerticalAlignment="Bottom" FontSize="12"/>
     </Grid>
 </Window>

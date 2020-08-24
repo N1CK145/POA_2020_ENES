@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POA_2020_GUI
+namespace POA_2020_GUI.objects
 {
-    class ActivityLogEntry
+    public class ActivityLogEntry
     {
         private int id;
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POA_2020_GUI
+namespace POA_2020_GUI.objects
 {
-    class User
+    public class User
     {
         private int id;
 
@@ -48,6 +48,15 @@ namespace POA_2020_GUI
             set { createdat = value; }
         }
 
+        private bool isLoggedIn;
+
+        public bool IsLoggedIn
+        {
+            get { return isLoggedIn; }
+            set { isLoggedIn = value; }
+        }
+
+
         public User(int id, string vorname, string nachname, string pin, DateTime createdat)
         {
             this.id = id;
@@ -55,6 +64,7 @@ namespace POA_2020_GUI
             this.nachname = nachname;
             this.pin = pin;
             this.createdat = createdat;
+            isLoggedIn = false;
         }
     }
 }

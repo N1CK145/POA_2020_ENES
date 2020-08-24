@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POA_2020_GUI
+namespace POA_2020_GUI.objects
 {
-    class Devices
+    public class Device
     {
         private int id;
 
@@ -24,7 +24,7 @@ namespace POA_2020_GUI
             set { bezeichnung = value; }
         }
 
-        public Devices(int id, string bezeichnung)
+        public Device(int id, string bezeichnung)
         {
             this.id = id;
             this.bezeichnung = bezeichnung;
