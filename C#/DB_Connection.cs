@@ -41,7 +41,7 @@ namespace Login.utils
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.ToString());
+                Console.WriteLine(e.ToString());
             }
         }
 

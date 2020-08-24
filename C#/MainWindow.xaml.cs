@@ -22,7 +22,12 @@ namespace POA_2020_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+<<<<<<< HEAD
         DB_Connection con;
+=======
+        public static MainWindow mainWindw;
+       
+>>>>>>> 2d55aaf0a8b7ed4af74eec1b11d7b6770b1f94f0
 
         public MainWindow()
         {
